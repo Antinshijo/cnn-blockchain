@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#f4f6f9;
+            text-align:center;
+        }
+
+        .container{
+            width:80%;
+            margin:auto;
+            margin-top:40px;
+        }
+
+        .stats{
+            display:flex;
+            justify-content:center;
+            gap:30px;
+            margin-bottom:40px;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            width:200px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h3{
+            margin-bottom:10px;
+        }
+
+        .dashboard-links{
+            display:flex;
+            justify-content:center;
+            gap:20px;
+        }
+
+        .dashboard-links a{
+            text-decoration:none;
+            background:#007bff;
+            color:white;
+            padding:12px 20px;
+            border-radius:6px;
+        }
+
+        .dashboard-links a:hover{
+            background:#0056b3;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Admin Dashboard</h2>
+
+    <!-- Analytics Section -->
+    <div class="stats">
+
+        <div class="card">
+            <h3>Total Blocks</h3>
+            <p>{{ total_blocks }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Products</h3>
+            <p>{{ total_products }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Latest Product</h3>
+            <p>{{ latest_product }}</p>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="dashboard-links">
+
+        <a href="/register">Register Product</a>
+
+        <a href="/blockchain">View Blockchain</a>
+
+        <a href="/verify">Verify Product</a>
+
+        <a href="/detect">AI Product Detection</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

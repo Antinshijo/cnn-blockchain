@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Product Detection</title>
+</head>
+
+<body>
+
+<h2>Upload Product Image</h2>
+
+<form method="POST" enctype="multipart/form-data">
+<input type="file" name="image" required>
+<button type="submit">Detect</button>
+</form>
+
+{% if image %}
+<h3>Uploaded Image</h3>
+<img src="/{{ image }}" width="200">
+{% endif %}
+
+{% if result %}
+<h3>Result: {{ result }}</h3>
+{% endif %}
+
+</body>
+</html>

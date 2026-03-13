@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify Product</title>
+</head>
+<body>
+
+    <h2>Verify Product</h2>
+
+    <form method="POST">
+        <input type="text" name="product_id" placeholder="Enter Product ID" required>
+        <button type="submit">Verify</button>
+    </form>
+
+    {% if result %}
+        <h3>{{ result }}</h3>
+    {% endif %}
+
+</body>
+</html>
