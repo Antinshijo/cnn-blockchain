@@ -266,5 +266,25 @@
                 "pattern_score": 207
             }
         }
+    },
+    {
+        "index": 19,
+        "timestamp": "2026-03-15 18:54:20.258037",
+        "proof": 1,
+        "previous_hash": "6a8e3011e03b8a3e0eb4482003be62eedf4a719f6ddfca4d2117383fdaf32ada",
+        "data": {
+            "product_name": "peter",
+            "product_id": "peter234568765",
+            "image": "static/product_images\\peter234568765.png",
+            "features": {
+                "mean_color": [
+                    78.928625,
+                    97.094475,
+                    136.38575
+                ],
+                "edge_strength": 903720,
+                "pattern_score": 106
+            }
+        }
     }
 ]
