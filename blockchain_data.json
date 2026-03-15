@@ -75,5 +75,76 @@
             "product_name": "dove",
             "product_id": "dove-890-opdf"
         }
+    },
+    {
+        "index": 9,
+        "timestamp": "2026-03-15 11:08:07.460234",
+        "proof": 1,
+        "previous_hash": "122f6b9203b9ba5d7cbc1e90057fbd60d6d6185b1c44d885ba277bfd183aa401",
+        "data": {
+            "product_name": "apple",
+            "product_id": "apple-123-5Ty",
+            "image": "static/product_images/apple-123-5Ty.png"
+        }
+    },
+    {
+        "index": 10,
+        "timestamp": "2026-03-15 11:22:23.118436",
+        "proof": 1,
+        "previous_hash": "610c1f94596bdfe17e9bd73f2f8b06499782abbaa7081afa7f2ce3c84428ef0c",
+        "data": {
+            "product_name": "logo",
+            "product_id": "logo-657-uLK(p",
+            "image": "static/product_images/logo-657-uLK(p.png",
+            "features": {
+                "mean_color": [
+                    230.329125,
+                    224.8216,
+                    215.990175
+                ],
+                "edge_strength": 1365270,
+                "pattern_score": 222
+            }
+        }
+    },
+    {
+        "index": 11,
+        "timestamp": "2026-03-15 12:10:35.140184",
+        "proof": 1,
+        "previous_hash": "e12393e1453aa45ff92e294225e71e4b84dde7d282b41e59105bf48973e44ef4",
+        "data": {
+            "product_name": "chair",
+            "product_id": "chair-$5%^-0",
+            "image": "static/product_images/chair-$5%^-0.png",
+            "features": {
+                "mean_color": [
+                    179.587825,
+                    186.7229,
+                    202.48745
+                ],
+                "edge_strength": 1176060,
+                "pattern_score": 190
+            }
+        }
+    },
+    {
+        "index": 12,
+        "timestamp": "2026-03-15 12:20:55.927957",
+        "proof": 1,
+        "previous_hash": "853df6bbee59a5f7133b98fba07df0570adfa1f6cf2501e2a2b9cd8e90d5fe58",
+        "data": {
+            "product_name": "file note",
+            "product_id": "5file-%56",
+            "image": "static/product_images/5file-%56.png",
+            "features": {
+                "mean_color": [
+                    78.928625,
+                    97.094475,
+                    136.38575
+                ],
+                "edge_strength": 903720,
+                "pattern_score": 106
+            }
+        }
     }
 ]

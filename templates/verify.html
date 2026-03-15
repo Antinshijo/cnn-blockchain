@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Verify Product</title>
+<title>Verify Product</title>
 </head>
+
 <body>
 
-    <h2>Verify Product</h2>
+<h2>Verify Product</h2>
 
-    <form method="POST">
-        <input type="text" name="product_id" placeholder="Enter Product ID" required>
-        <button type="submit">Verify</button>
-    </form>
+<form method="POST" enctype="multipart/form-data">
 
-    {% if result %}
-        <h3>{{ result }}</h3>
-    {% endif %}
+<input type="text" name="product_id" placeholder="Product ID" required>
+<br><br>
+
+<input type="file" name="image" accept="image/*" capture="environment" required>
+
+<br><br>
+
+<button type="submit">Verify Product</button>
+
+</form>
+
+{% if image %}
+<h3>Uploaded Image</h3>
+<img src="/{{ image }}" width="200">
+{% endif %}
+
+{% if result %}
+<h3>{{ result }}</h3>
+{% endif %}
 
 </body>
 </html>
