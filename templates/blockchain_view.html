@@ -1,21 +1,298 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Blockchain</title>
+
+<title>Blockchain Network</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#010409;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* CYBER GRID */
+
+body::before{
+
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+
+background-image:
+linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+
+background-size:80px 80px;
+
+animation:gridMove 35s linear infinite;
+
+z-index:-2;
+
+}
+
+@keyframes gridMove{
+
+0%{transform:translate(0,0)}
+100%{transform:translate(-400px,-400px)}
+
+}
+
+/* FLOATING ROBOTS */
+
+.robot{
+position:absolute;
+font-size:38px;
+opacity:0.12;
+animation:float 18s infinite ease-in-out;
+}
+
+.robot:nth-child(1){top:5%;left:5%}
+.robot:nth-child(2){top:85%;left:15%}
+.robot:nth-child(3){top:20%;right:10%}
+.robot:nth-child(4){bottom:10%;right:5%}
+
+@keyframes float{
+
+0%{transform:translateY(0)}
+50%{transform:translateY(-50px)}
+100%{transform:translateY(0)}
+
+}
+
+/* HEADER */
+
+.header{
+text-align:center;
+padding:50px 20px;
+}
+
+.header h1{
+font-size:42px;
+margin-bottom:10px;
+letter-spacing:2px;
+}
+
+.slogan{
+opacity:0.75;
+font-size:16px;
+}
+
+/* BLOCKCHAIN CONTAINER */
+
+.blockchain{
+width:90%;
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+/* BLOCK CARD */
+
+.block{
+
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(0,255,255,0.2);
+
+padding:25px;
+margin:30px 0;
+
+border-radius:12px;
+
+position:relative;
+
+backdrop-filter:blur(10px);
+
+transition:0.4s;
+
+}
+
+/* CHAIN CONNECTOR */
+
+.block::after{
+
+content:"⛓";
+
+position:absolute;
+
+bottom:-28px;
+left:50%;
+
+transform:translateX(-50%);
+
+font-size:26px;
+
+opacity:0.4;
+
+}
+
+/* REMOVE LAST CHAIN */
+
+.block:last-child::after{
+display:none;
+}
+
+/* BLOCK HOVER */
+
+.block:hover{
+
+transform:scale(1.03);
+
+box-shadow:0 0 25px rgba(0,255,255,0.4);
+
+}
+
+/* DATA TEXT */
+
+.block p{
+margin:6px 0;
+word-break:break-word;
+}
+
+/* HASH STYLE */
+
+.hash{
+
+color:#00e5ff;
+font-size:13px;
+
+}
+
+/* SHINE EFFECT */
+
+.block::before{
+
+content:"";
+
+position:absolute;
+
+top:-50%;
+left:-50%;
+
+width:200%;
+height:200%;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(0,255,255,0.3),
+transparent
+);
+
+transform:rotate(25deg);
+
+opacity:0;
+
+}
+
+.block:hover::before{
+
+opacity:1;
+
+animation:shine 2s linear infinite;
+
+}
+
+@keyframes shine{
+
+0%{transform:translateX(-100%) rotate(25deg)}
+100%{transform:translateX(100%) rotate(25deg)}
+
+}
+
+/* BACK BUTTON */
+
+.back{
+
+display:block;
+
+text-align:center;
+
+margin:40px;
+
+color:#aaa;
+
+text-decoration:none;
+
+font-size:16px;
+
+}
+
+.back:hover{
+color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.header h1{
+font-size:28px;
+}
+
+.block{
+padding:18px;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
-    <h2>Blockchain Data</h2>
-    <div class="block">
 
-    {% for block in chain %}
-        <p><strong>Index:</strong> {{ block.index }}</p>
-        <p><strong>Name:</strong> {{ block.data }}</p>
-        <p><strong>Timestamp:</strong> {{ block.timestamp }}</p>
-        <p><strong>Previous Hash:</strong> {{ block.previous_hash }}</p>
-        <hr>
-    {% endfor %}
-    </div>
+<div class="robot">🤖</div>
+<div class="robot">🤖</div>
+<div class="robot">🤖</div>
+<div class="robot">🤖</div>
 
-    <a href="/dashboard">Back</a>
+<div class="header">
+
+<h1>Blockchain Network</h1>
+
+<p class="slogan">
+Trust the Chain. Verify the Truth. Power of Decentralized Security.
+</p>
+
+</div>
+
+<div class="blockchain">
+
+{% for block in chain %}
+
+<div class="block">
+
+<p><strong>Index:</strong> {{ block.index }}</p>
+
+<p><strong>Data:</strong> {{ block.data }}</p>
+
+<p><strong>Timestamp:</strong> {{ block.timestamp }}</p>
+
+<p class="hash"><strong>Previous Hash:</strong> {{ block.previous_hash }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<a class="back" href="/dashboard">
+← Back to Dashboard
+</a>
+
 </body>
 </html>

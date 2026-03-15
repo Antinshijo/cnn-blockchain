@@ -1,20 +1,267 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>QR Code</title>
+
+<title>QR Verification</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+
+min-height:100vh;
+
+background:radial-gradient(circle at top,#0f172a,#020617);
+
+color:white;
+
+text-align:center;
+
+overflow:hidden;
+
+}
+
+/* CYBER GRID */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:200%;
+
+height:200%;
+
+background-image:
+
+linear-gradient(rgba(0,255,255,0.06) 1px, transparent 1px),
+
+linear-gradient(90deg, rgba(0,255,255,0.06) 1px, transparent 1px);
+
+background-size:70px 70px;
+
+animation:gridMove 35s linear infinite;
+
+z-index:-2;
+
+}
+
+@keyframes gridMove{
+
+0%{transform:translate(0,0)}
+
+100%{transform:translate(-300px,-300px)}
+
+}
+
+/* FLOATING ICONS */
+
+.icon{
+
+position:absolute;
+
+font-size:38px;
+
+opacity:0.15;
+
+animation:float 16s infinite ease-in-out;
+
+}
+
+.icon:nth-child(1){top:8%;left:8%}
+.icon:nth-child(2){top:20%;right:8%}
+.icon:nth-child(3){top:70%;left:12%}
+.icon:nth-child(4){bottom:15%;right:10%}
+.icon:nth-child(5){top:40%;left:5%}
+.icon:nth-child(6){top:60%;right:5%}
+
+@keyframes float{
+
+0%{transform:translateY(0)}
+50%{transform:translateY(-45px)}
+100%{transform:translateY(0)}
+
+}
+
+/* CONTAINER */
+
+.container{
+
+margin-top:80px;
+
+animation:fadeIn 1s ease;
+
+}
+
+/* TITLE */
+
+h2{
+
+font-size:36px;
+
+color:#00e5ff;
+
+text-shadow:0 0 15px rgba(0,229,255,0.7);
+
+margin-bottom:15px;
+
+}
+
+/* SLOGAN */
+
+.slogan{
+
+font-size:16px;
+
+opacity:0.85;
+
+margin-bottom:30px;
+
+}
+
+/* QR BOX */
+
+.qr-box{
+
+display:inline-block;
+
+padding:25px;
+
+background:rgba(255,255,255,0.05);
+
+border:1px solid rgba(0,255,255,0.3);
+
+border-radius:12px;
+
+backdrop-filter:blur(10px);
+
+transition:0.4s;
+
+}
+
+.qr-box:hover{
+
+transform:scale(1.05);
+
+box-shadow:0 0 25px rgba(0,255,255,0.5);
+
+}
+
+/* QR IMAGE */
+
+.qr-box img{
+
+width:220px;
+
+}
+
+/* BUTTON */
+
+.back{
+
+display:inline-block;
+
+margin-top:35px;
+
+padding:10px 20px;
+
+border-radius:8px;
+
+background:linear-gradient(45deg,#00c6ff,#0072ff);
+
+color:white;
+
+text-decoration:none;
+
+transition:0.3s;
+
+}
+
+.back:hover{
+
+transform:scale(1.08);
+
+box-shadow:0 0 15px rgba(0,150,255,0.6);
+
+}
+
+/* FADE */
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+h2{
+font-size:26px;
+}
+
+.qr-box img{
+width:180px;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
 
+<!-- FLOATING CYBER ICONS -->
+
+<div class="icon">🤖</div>
+<div class="icon">⛓</div>
+<div class="icon">📱</div>
+<div class="icon">🔐</div>
+<div class="icon">🧠</div>
+<div class="icon">📡</div>
+
+<div class="container">
+
 <h2>Product Registered Successfully ✅</h2>
 
-<p>Scan this QR code to verify the product</p>
+<p class="slogan">
+Scan the QR Code to Verify Authenticity —  
+AI + Blockchain Ensuring Trusted Products
+</p>
 
-<img src="/{{ qr_path }}" width="200">
+<div class="qr-box">
 
-<br><br>
+<img src="/{{ qr_path }}">
 
-<a href="/dashboard">Back to Dashboard</a>
+</div>
+
+<br>
+
+<a class="back" href="/dashboard">
+← Back to Dashboard
+</a>
+
+</div>
 
 </body>
 </html>

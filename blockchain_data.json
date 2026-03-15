@@ -186,5 +186,85 @@
                 "pattern_score": 211
             }
         }
+    },
+    {
+        "index": 15,
+        "timestamp": "2026-03-15 14:24:10.789815",
+        "proof": 1,
+        "previous_hash": "9c3805a2bb953e94c66434b0a1039e218160b131ed35c5eb42eba189ae4fa809",
+        "data": {
+            "product_name": "tree",
+            "product_id": "tree3456",
+            "image": "static/product_images\\tree3456.png",
+            "features": {
+                "mean_color": [
+                    78.928625,
+                    97.094475,
+                    136.38575
+                ],
+                "edge_strength": 903720,
+                "pattern_score": 106
+            }
+        }
+    },
+    {
+        "index": 16,
+        "timestamp": "2026-03-15 15:49:00.981923",
+        "proof": 1,
+        "previous_hash": "fdce9ee9e6eef6cef1476754a4646d7193fd352012e5a19d5f2648673e61526e",
+        "data": {
+            "product_name": "hagout",
+            "product_id": "hang12345",
+            "image": "static/product_images\\hang12345.png",
+            "features": {
+                "mean_color": [
+                    59.477,
+                    63.231,
+                    97.266775
+                ],
+                "edge_strength": 1022550,
+                "pattern_score": 72
+            }
+        }
+    },
+    {
+        "index": 17,
+        "timestamp": "2026-03-15 17:06:51.214216",
+        "proof": 1,
+        "previous_hash": "759276b6406adeb8ac60f5630ca484a6cb9cd1663d32df698bfd63d71304e1e7",
+        "data": {
+            "product_name": "iphone",
+            "product_id": "iphone23456876543",
+            "image": "static/product_images\\iphone23456876543.png",
+            "features": {
+                "mean_color": [
+                    35.6047,
+                    57.21335,
+                    166.851925
+                ],
+                "edge_strength": 558705,
+                "pattern_score": 87
+            }
+        }
+    },
+    {
+        "index": 18,
+        "timestamp": "2026-03-15 17:16:38.377441",
+        "proof": 1,
+        "previous_hash": "da096bbc41586dd742a86aee85795e3c66d5491fc8404693b54bcd084398c00b",
+        "data": {
+            "product_name": "monitor",
+            "product_id": "moni234598765",
+            "image": "static/product_images\\moni234598765.png",
+            "features": {
+                "mean_color": [
+                    212.2335,
+                    208.4909,
+                    203.871575
+                ],
+                "edge_strength": 496740,
+                "pattern_score": 207
+            }
+        }
     }
 ]

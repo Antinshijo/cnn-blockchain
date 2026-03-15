@@ -2,55 +2,224 @@
 <html>
 
 <head>
-<title>Verify Product</title>
+<title>AI Product Verification</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
 body{
-font-family: Arial;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+background:#020617;
+overflow:hidden;
+}
+
+/* CYBER GRID BACKGROUND */
+
+body::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background-image:
+linear-gradient(rgba(0,255,255,0.08) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,255,255,0.08) 1px, transparent 1px);
+background-size:60px 60px;
+animation:gridMove 25s linear infinite;
+}
+
+@keyframes gridMove{
+0%{transform:translate(0,0)}
+100%{transform:translate(-200px,-200px)}
+}
+
+/* FLOATING AI ROBOTS */
+
+.robot{
+position:absolute;
+font-size:35px;
+opacity:0.12;
+animation:floatRobot 18s infinite linear;
+}
+
+.robot:nth-child(1){top:10%;left:5%}
+.robot:nth-child(2){top:70%;left:10%}
+.robot:nth-child(3){top:30%;right:10%}
+.robot:nth-child(4){bottom:10%;right:5%}
+
+@keyframes floatRobot{
+
+0%{transform:translateY(0)}
+50%{transform:translateY(-40px)}
+100%{transform:translateY(0)}
+
+}
+
+/* PARTICLES */
+
+.particle{
+position:absolute;
+width:4px;
+height:4px;
+background:#00ffff;
+border-radius:50%;
+opacity:0.6;
+animation:particleMove 10s linear infinite;
+}
+
+@keyframes particleMove{
+
+0%{
+transform:translateY(0);
+opacity:0;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-600px);
+opacity:0;
+}
+
+}
+
+/* MAIN FORM */
+
+.main-ui{
 text-align:center;
-background:#f4f6f9;
+z-index:5;
+animation:fadeIn 1.2s ease;
 }
 
-.container{
-margin-top:40px;
+h1{
+font-size:36px;
+margin-bottom:10px;
 }
 
-input,button{
-padding:10px;
+.slogan{
+opacity:0.7;
+margin-bottom:30px;
+}
+
+/* INPUT */
+
+input{
+width:260px;
+padding:12px;
 margin:10px;
+border:none;
+border-radius:6px;
+outline:none;
+font-size:14px;
 }
+
+/* BUTTON */
 
 button{
-background:#4CAF50;
-color:white;
+padding:12px 25px;
 border:none;
+border-radius:6px;
+background:linear-gradient(45deg,#00e5ff,#0072ff);
+color:white;
+font-size:15px;
 cursor:pointer;
+transition:0.3s;
 }
 
 button:hover{
-background:#45a049;
+transform:scale(1.08);
+box-shadow:0 0 20px #00e5ff;
 }
 
+/* IMAGE */
+
+img{
+margin-top:20px;
+border-radius:8px;
+max-width:220px;
+}
+
+/* PROGRESS BAR */
+
 .progress{
-width:300px;
+width:260px;
 margin:auto;
-background:#ddd;
-border-radius:10px;
+margin-top:10px;
+background:#333;
+border-radius:20px;
 overflow:hidden;
 }
 
 .bar{
-height:20px;
+height:18px;
+transition:0.5s;
 }
 
-.result-box{
+/* RESULT */
+
+.result{
 margin-top:20px;
-padding:15px;
-background:white;
-display:inline-block;
-border-radius:10px;
-box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+font-size:18px;
+}
+
+/* BACK BUTTON */
+
+.back{
+display:block;
+margin-top:25px;
+color:#aaa;
+text-decoration:none;
+}
+
+.back:hover{
+color:white;
+}
+
+/* FADE */
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+h1{
+font-size:26px;
+}
+
+input{
+width:90%;
+}
+
+.progress{
+width:90%;
+}
+
 }
 
 </style>
@@ -59,45 +228,67 @@ box-shadow:0px 0px 10px rgba(0,0,0,0.1);
 
 <body>
 
-<div class="container">
+<div class="robot">🤖</div>
+<div class="robot">🤖</div>
+<div class="robot">🤖</div>
+<div class="robot">🤖</div>
 
-<h2>Verify Product</h2>
+<div class="particle" style="left:20%;animation-delay:0s"></div>
+<div class="particle" style="left:40%;animation-delay:2s"></div>
+<div class="particle" style="left:60%;animation-delay:4s"></div>
+<div class="particle" style="left:80%;animation-delay:6s"></div>
+
+<div class="main-ui">
+
+<h1>AI Product Scanner</h1>
+
+<p class="slogan">
+Detect fake products using Artificial Intelligence
+</p>
 
 <form method="POST" enctype="multipart/form-data">
 
-<input type="text" name="product_id" placeholder="Product ID" required>
+<input 
+type="text"
+name="product_id"
+id="product_id"
+placeholder="Product ID"
+required>
+
 <br>
 
-<input type="file" name="image" accept="image/*" capture="environment" required>
+<input 
+type="file"
+name="image"
+accept="image/*"
+capture="environment"
+required>
 
 <br>
 
-<button type="submit">Verify Product</button>
+<button type="submit">
+Start AI Scan
+</button>
 
 </form>
 
 
 {% if image %}
 
-<div class="result-box">
-
-<h3>Uploaded Image</h3>
-<img src="/{{ image }}" width="200">
-
-</div>
+<img src="/{{ image }}">
 
 {% endif %}
 
 
 {% if result %}
 
-<div class="result-box">
+<div class="result">
 
 <h3>{{ result }}</h3>
 
 {% if similarity %}
 
-<h3>Similarity Score: {{ similarity }}%</h3>
+<p>Similarity Score: {{ similarity }}%</p>
 
 <div class="progress">
 <div class="bar"
@@ -105,7 +296,7 @@ style="
 width:{{ similarity }}%;
 background:
 {% if similarity > 70 %}
-green
+#00ff9d
 {% elif similarity > 40 %}
 orange
 {% else %}
@@ -118,14 +309,27 @@ red
 {% endif %}
 
 {% if reason %}
-<h4>Reason: {{ reason }}</h4>
+<p>{{ reason }}</p>
 {% endif %}
 
 </div>
 
 {% endif %}
 
+<a class="back" href="/dashboard">← Back to Dashboard</a>
+
 </div>
+
+<script>
+
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('product_id');
+
+if(productId){
+document.getElementById("product_id").value = productId;
+}
+
+</script>
 
 </body>
 </html>

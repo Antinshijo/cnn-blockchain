@@ -1,26 +1,292 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>Registered Products</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+min-height:100vh;
+background:radial-gradient(circle at top,#0f172a,#020617);
+color:white;
+overflow-x:hidden;
+}
+
+/* CYBER PARTICLES */
+
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background-image:
+radial-gradient(circle,#00e5ff 1px,transparent 1px);
+background-size:60px 60px;
+opacity:0.1;
+animation:moveBg 30s linear infinite;
+z-index:-1;
+}
+
+@keyframes moveBg{
+0%{transform:translate(0,0)}
+100%{transform:translate(-200px,-200px)}
+}
+
+/* HEADER */
+
+.header{
+text-align:center;
+padding:50px 20px;
+}
+
+.header h1{
+font-size:40px;
+color:#00e5ff;
+text-shadow:0 0 15px rgba(0,229,255,0.6);
+margin-bottom:10px;
+}
+
+.slogan{
+opacity:0.8;
+}
+
+/* PRODUCT GRID */
+
+.products{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:35px;
+
+padding:50px;
+
+}
+
+/* CARD */
+
+.card{
+
+height:340px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:space-between;
+
+background:rgba(255,255,255,0.05);
+
+border:1px solid rgba(0,255,255,0.3);
+
+border-radius:14px;
+
+padding:20px;
+
+text-align:center;
+
+backdrop-filter:blur(10px);
+
+transition:0.4s;
+
+position:relative;
+
+}
+
+/* NEON HOVER */
+
+.card:hover{
+
+transform:translateY(-12px) scale(1.04);
+
+box-shadow:0 0 30px rgba(0,255,255,0.6);
+
+}
+
+/* IMAGE CONTAINER */
+
+.img-box{
+
+height:150px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+overflow:hidden;
+
+}
+
+/* PRODUCT IMAGE */
+
+.img-box img{
+
+max-height:140px;
+
+max-width:100%;
+
+border-radius:8px;
+
+transition:0.3s;
+
+}
+
+.card:hover img{
+
+transform:scale(1.08);
+
+}
+
+/* PRODUCT NAME */
+
+.card h3{
+
+color:#00e5ff;
+
+font-size:20px;
+
+}
+
+/* PRODUCT ID */
+
+.card p{
+
+font-size:14px;
+
+opacity:0.85;
+
+}
+
+/* CLEAR BUTTON */
+
+.clear-btn{
+
+margin-top:10px;
+
+padding:8px;
+
+border:none;
+
+border-radius:6px;
+
+background:linear-gradient(45deg,#ff4d4d,#ff0000);
+
+color:white;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.clear-btn:hover{
+
+transform:scale(1.08);
+
+box-shadow:0 0 12px rgba(255,0,0,0.6);
+
+}
+
+/* BACK BUTTON */
+
+.back{
+
+display:block;
+
+text-align:center;
+
+margin:40px;
+
+color:#9ca3af;
+
+text-decoration:none;
+
+font-size:16px;
+
+}
+
+.back:hover{
+
+color:#00e5ff;
+
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+.header h1{
+font-size:28px;
+}
+
+.products{
+padding:25px;
+gap:25px;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h2>Registered Products</h2>
+<div class="header">
+
+<h1>Registered Products</h1>
+
+<p class="slogan">
+Trusted Products Powered by AI & Blockchain Security
+</p>
+
+</div>
+
+<div class="products">
 
 {% for p in products %}
 
-<div style="border:1px solid #ccc;padding:10px;margin:10px;width:200px">
+<div class="card">
 
-<h4>{{ p.product_name }}</h4>
+<h3>{{ p.product_name }}</h3>
 
 <p>ID: {{ p.product_id }}</p>
 
-<img src="/{{ p.image }}" width="150">
+<div class="img-box">
+
+<img src="/{{ p.image }}">
+
+</div>
+
+<form action="/delete_product/{{ p.product_id }}" method="POST">
+
+<button class="clear-btn">Clear Product</button>
+
+</form>
 
 </div>
 
 {% endfor %}
+
+</div>
+
+<a class="back" href="/dashboard">
+← Back to Dashboard
+</a>
 
 </body>
 </html>
