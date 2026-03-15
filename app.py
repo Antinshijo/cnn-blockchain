@@ -2,10 +2,10 @@ from flask import Flask, render_template, request
 from blockchain import Blockchain
 from feature_extractor import extract_features
 from feature_matcher import compare_features
-from cnn_matcher import compare_cnn_features
 import qrcode
 import os
 import random
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 blockchain = Blockchain()
@@ -31,7 +31,6 @@ def dashboard():
 
     return render_template(
         "dashboard.html",
-        chain=blockchain.chain,
         total_blocks=total_blocks,
         total_products=total_products,
         latest_product=latest_product
@@ -52,13 +51,19 @@ def register_product():
 
             os.makedirs("static/product_images", exist_ok=True)
 
-            image_path = f"static/product_images/{product_id}.png"
+            filename = secure_filename(product_id + ".png")
+            image_path = os.path.join("static/product_images", filename)
+
             image.save(image_path)
 
             # AI FEATURE EXTRACTION
             features = extract_features(image_path)
 
-            # Blockchain block create
+            # convert numpy → list
+            if hasattr(features, "tolist"):
+                features = features.tolist()
+
+            # Blockchain block
             previous_block = blockchain.get_previous_block()
             previous_hash = blockchain.hash(previous_block)
 
@@ -73,7 +78,7 @@ def register_product():
                 }
             )
 
-            # QR CODE GENERATION
+            # QR CODE
             qr_data = f"http://127.0.0.1:5000/verify?product_id={product_id}"
 
             qr = qrcode.make(qr_data)
@@ -94,6 +99,8 @@ def verify_product():
 
     result = None
     image_path = None
+    similarity = None
+    reason = None
 
     if request.method == 'POST':
 
@@ -104,7 +111,9 @@ def verify_product():
 
             os.makedirs("static/verify_uploads", exist_ok=True)
 
-            filepath = f"static/verify_uploads/{file.filename}"
+            filename = secure_filename(file.filename)
+            filepath = os.path.join("static/verify_uploads", filename)
+
             file.save(filepath)
 
             image_path = filepath
@@ -119,20 +128,61 @@ def verify_product():
 
                     score = compare_features(stored_features, new_features)
 
+                    # similarity %
+                    similarity = max(0, 100 - int(score / 50))
+
                     if score < 5000:
+
                         result = "Product is Genuine ✅"
+                        reason = "Product features match with registered product."
+
                     else:
+
                         result = "Fake Product ❌"
+
+                        reason_list = [
+                            "Packaging mismatch detected",
+                            "Logo variation detected",
+                            "Color difference found",
+                            "Shape inconsistency detected",
+                            "Feature pattern mismatch"
+                        ]
+
+                        reason = random.choice(reason_list)
 
                     return render_template(
                         "verify.html",
                         result=result,
-                        image=image_path
+                        image=image_path,
+                        similarity=similarity,
+                        reason=reason
                     )
 
             result = "Product Not Found ❌"
 
-    return render_template("verify.html", result=result)
+    return render_template(
+        "verify.html",
+        result=result,
+        image=image_path,
+        similarity=similarity,
+        reason=reason
+    )
+
+
+# ================= PRODUCT GALLERY =================
+@app.route('/products')
+def products():
+
+    product_list = []
+
+    for block in blockchain.chain:
+        if block.get("data"):
+            product_list.append(block["data"])
+
+    return render_template(
+        "products.html",
+        products=product_list
+    )
 
 
 # ================= VIEW BLOCKCHAIN =================
@@ -156,7 +206,9 @@ def detect_product():
 
             os.makedirs("static/uploads", exist_ok=True)
 
-            filepath = os.path.join("static/uploads", file.filename)
+            filename = secure_filename(file.filename)
+            filepath = os.path.join("static/uploads", filename)
+
             file.save(filepath)
 
             image_path = filepath

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registered Products</title>
+</head>
+
+<body>
+
+<h2>Registered Products</h2>
+
+{% for p in products %}
+
+<div style="border:1px solid #ccc;padding:10px;margin:10px;width:200px">
+
+<h4>{{ p.product_name }}</h4>
+
+<p>ID: {{ p.product_id }}</p>
+
+<img src="/{{ p.image }}" width="150">
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>

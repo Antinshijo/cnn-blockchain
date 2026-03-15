@@ -146,5 +146,45 @@
                 "pattern_score": 106
             }
         }
+    },
+    {
+        "index": 13,
+        "timestamp": "2026-03-15 12:54:35.285380",
+        "proof": 1,
+        "previous_hash": "5528cd05c88112fd341c2455c72094f07f8cd37f9920156a50ddff86926cd5af",
+        "data": {
+            "product_name": "malik",
+            "product_id": "malik098",
+            "image": "static/product_images/malik098.png",
+            "features": {
+                "mean_color": [
+                    82.065725,
+                    98.804875,
+                    132.19665
+                ],
+                "edge_strength": 878985,
+                "pattern_score": 106
+            }
+        }
+    },
+    {
+        "index": 14,
+        "timestamp": "2026-03-15 14:05:08.556684",
+        "proof": 1,
+        "previous_hash": "c3043be8383b62d6fd54664db511eae19929af23640d1f3fc2e0f230aa006284",
+        "data": {
+            "product_name": "foofie",
+            "product_id": "foodiee3456",
+            "image": "static/product_images/foodiee3456.png",
+            "features": {
+                "mean_color": [
+                    217.75695,
+                    212.025975,
+                    205.2173
+                ],
+                "edge_strength": 637500,
+                "pattern_score": 211
+            }
+        }
     }
 ]

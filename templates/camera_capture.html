@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Capture Product</title>
+
+<style>
+
+#video{
+width:400px;
+border:3px solid black;
+}
+
+#overlay{
+position:absolute;
+border:4px solid red;
+width:250px;
+height:250px;
+top:80px;
+left:75px;
+pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Align Product Inside Box</h2>
+
+<div style="position:relative">
+
+<video id="video" autoplay></video>
+<div id="overlay"></div>
+
+</div>
+
+<br>
+
+<button onclick="capture()">Capture</button>
+
+<canvas id="canvas" style="display:none;"></canvas>
+
+<script>
+
+const video = document.getElementById('video');
+
+navigator.mediaDevices.getUserMedia({ video:true })
+.then(stream=>{
+video.srcObject = stream;
+});
+
+function capture(){
+
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
+
+canvas.width = 250;
+canvas.height = 250;
+
+ctx.drawImage(video,75,80,250,250,0,0,250,250);
+
+let image = canvas.toDataURL("image/png");
+
+console.log(image);
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,34 +1,131 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <title>Verify Product</title>
+
+<style>
+
+body{
+font-family: Arial;
+text-align:center;
+background:#f4f6f9;
+}
+
+.container{
+margin-top:40px;
+}
+
+input,button{
+padding:10px;
+margin:10px;
+}
+
+button{
+background:#4CAF50;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#45a049;
+}
+
+.progress{
+width:300px;
+margin:auto;
+background:#ddd;
+border-radius:10px;
+overflow:hidden;
+}
+
+.bar{
+height:20px;
+}
+
+.result-box{
+margin-top:20px;
+padding:15px;
+background:white;
+display:inline-block;
+border-radius:10px;
+box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+}
+
+</style>
+
 </head>
 
 <body>
+
+<div class="container">
 
 <h2>Verify Product</h2>
 
 <form method="POST" enctype="multipart/form-data">
 
 <input type="text" name="product_id" placeholder="Product ID" required>
-<br><br>
+<br>
 
 <input type="file" name="image" accept="image/*" capture="environment" required>
 
-<br><br>
+<br>
 
 <button type="submit">Verify Product</button>
 
 </form>
 
+
 {% if image %}
+
+<div class="result-box">
+
 <h3>Uploaded Image</h3>
 <img src="/{{ image }}" width="200">
+
+</div>
+
 {% endif %}
 
+
 {% if result %}
+
+<div class="result-box">
+
 <h3>{{ result }}</h3>
+
+{% if similarity %}
+
+<h3>Similarity Score: {{ similarity }}%</h3>
+
+<div class="progress">
+<div class="bar"
+style="
+width:{{ similarity }}%;
+background:
+{% if similarity > 70 %}
+green
+{% elif similarity > 40 %}
+orange
+{% else %}
+red
 {% endif %}
+;">
+</div>
+</div>
+
+{% endif %}
+
+{% if reason %}
+<h4>Reason: {{ reason }}</h4>
+{% endif %}
+
+</div>
+
+{% endif %}
+
+</div>
 
 </body>
 </html>
