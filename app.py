@@ -14,7 +14,7 @@ blockchain = Blockchain()
 # ================= HOME =================
 @app.route('/')
 def home():
-    return render_template("login.html")
+    return "WORKING ✅"
 
 
 # ================= DASHBOARD =================

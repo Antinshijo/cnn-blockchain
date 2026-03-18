@@ -286,5 +286,25 @@
                 "pattern_score": 106
             }
         }
+    },
+    {
+        "index": 20,
+        "timestamp": "2026-03-18 11:15:24.064535",
+        "proof": 1,
+        "previous_hash": "a5a0e1c6cf7c9852dbe7d469a3d90504e1b01f4ac0dc467bb7bcd13d8f39c5e6",
+        "data": {
+            "product_name": "gold",
+            "product_id": "gold12347654",
+            "image": "static/product_images\\gold12347654.png",
+            "features": {
+                "mean_color": [
+                    78.928625,
+                    97.094475,
+                    136.38575
+                ],
+                "edge_strength": 903720,
+                "pattern_score": 106
+            }
+        }
     }
 ]
