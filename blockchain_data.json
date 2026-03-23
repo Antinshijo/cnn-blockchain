@@ -306,5 +306,25 @@
                 "pattern_score": 106
             }
         }
+    },
+    {
+        "index": 21,
+        "timestamp": "2026-03-20 11:25:34.692881",
+        "proof": 1,
+        "previous_hash": "20209d592a1c0ccc6877f15cd86f94ab105820cb3d1497c46654160bfeded893",
+        "data": {
+            "product_name": "elish",
+            "product_id": "elish123476543",
+            "image": "static/product_images\\elish123476543.png",
+            "features": {
+                "mean_color": [
+                    78.928625,
+                    97.094475,
+                    136.38575
+                ],
+                "edge_strength": 903720,
+                "pattern_score": 106
+            }
+        }
     }
 ]
