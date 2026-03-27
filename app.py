@@ -79,7 +79,7 @@ def register_product():
             )
 
             # QR CODE
-            qr_data = f"http://127.0.0.1:5000/verify?product_id={product_id}"
+            qr_data = qr_data = f"http://65.1.64.109:5000/verify?product_id={product_id}"
 
             qr = qrcode.make(qr_data)
 
