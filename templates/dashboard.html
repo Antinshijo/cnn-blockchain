@@ -2,9 +2,7 @@
 <html>
 
 <head>
-
 <title>AI Blockchain Dashboard</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -14,68 +12,40 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:Segoe UI;
+scroll-behavior:smooth;
 }
 
 body{
-
-min-height:100vh;
-
 background:radial-gradient(circle at top,#0f172a,#020617);
-
 color:white;
-
-text-align:center;
-
-overflow:hidden;
-
+overflow-x:hidden;
 }
 
 /* CYBER GRID */
-
 body::before{
-
 content:"";
-
 position:fixed;
-
 width:200%;
-
 height:200%;
-
 background-image:
-
 linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
-
 linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
-
 background-size:70px 70px;
-
 animation:gridMove 40s linear infinite;
-
 z-index:-2;
-
 }
 
 @keyframes gridMove{
-
 0%{transform:translate(0,0)}
-
 100%{transform:translate(-350px,-350px)}
-
 }
 
-/* FLOATING ICONS */
-
+/* FLOAT ICONS */
 .icon{
-
 position:absolute;
-
-font-size:38px;
-
+font-size:36px;
 opacity:0.15;
-
 animation:float 18s infinite ease-in-out;
-
 }
 
 .icon:nth-child(1){top:5%;left:5%}
@@ -95,183 +65,169 @@ animation:float 18s infinite ease-in-out;
 .icon:nth-child(15){top:25%;left:25%}
 
 @keyframes float{
-
 0%{transform:translateY(0)}
 50%{transform:translateY(-50px)}
 100%{transform:translateY(0)}
-
 }
 
-/* HEADER */
-
-.header{
-
-margin-top:60px;
-
-animation:fadeIn 1s ease;
-
-}
-
-.header h1{
-
-font-size:44px;
-
-color:#00e5ff;
-
-text-shadow:0 0 20px rgba(0,229,255,0.8);
-
-margin-bottom:10px;
-
-}
-
-.slogan{
-
-font-size:16px;
-
-opacity:0.85;
-
-}
-
-/* STATS */
-
-.stats{
-
+/* NAVBAR */
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
 display:flex;
-
-justify-content:center;
-
-gap:40px;
-
-margin-top:60px;
-
-flex-wrap:wrap;
-
+justify-content:space-between;
+align-items:center;
+padding:15px 25px;
+z-index:1000;
 }
 
-/* STAT CARD */
-
-.card{
-
-background:rgba(255,255,255,0.05);
-
-border:1px solid rgba(0,255,255,0.3);
-
-border-radius:14px;
-
-padding:25px;
-
-width:220px;
-
-backdrop-filter:blur(12px);
-
-transition:0.4s;
-
-}
-
-.card:hover{
-
-transform:translateY(-10px) scale(1.05);
-
-box-shadow:0 0 30px rgba(0,255,255,0.5);
-
-}
-
-.card h3{
-
+.logo{
 color:#00e5ff;
-
-margin-bottom:10px;
-
+font-weight:bold;
+font-size:18px;
 }
 
-.card p{
-
-font-size:22px;
-
-}
-
-/* NAVIGATION */
-
-.dashboard-links{
-
-margin-top:60px;
-
+.nav-links{
 display:flex;
-
-justify-content:center;
-
-gap:25px;
-
-flex-wrap:wrap;
-
-}
-
-/* BUTTON */
-
-.dashboard-links a{
-
-text-decoration:none;
-
-padding:14px 24px;
-
-border-radius:10px;
-
-background:linear-gradient(45deg,#00c6ff,#0072ff);
-
-color:white;
-
-font-size:15px;
-
-transition:0.3s;
-
-}
-
-.dashboard-links a:hover{
-
-transform:scale(1.08);
-
-box-shadow:0 0 18px rgba(0,150,255,0.7);
-
-}
-
-/* FADE */
-
-@keyframes fadeIn{
-
-from{
-opacity:0;
-transform:translateY(30px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-.header h1{
-font-size:30px;
-}
-
-.stats{
 gap:20px;
 }
 
+.nav-links a{
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+.nav-links a:hover{
+color:#00e5ff;
+}
+
+/* MOBILE MENU */
+.menu{
+display:none;
+font-size:22px;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+.menu{display:block;}
+.nav-links{
+flex-direction:column;
+position:absolute;
+top:60px;
+right:0;
+background:black;
+width:200px;
+display:none;
+padding:15px;
+}
+.nav-links.active{
+display:flex;
+}
+}
+
+/* HEADER */
+.header{
+margin-top:100px;
+text-align:center;
+padding:20px;
+}
+
+.header h1{
+font-size:38px;
+color:#00e5ff;
+}
+
+/* STATS */
+.stats{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(0,255,255,0.3);
+border-radius:14px;
+padding:20px;
+width:200px;
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px) scale(1.05);
+box-shadow:0 0 30px rgba(0,255,255,0.5);
+}
+
+/* SECTIONS */
+.section{
+padding:70px 20px;
+text-align:center;
+}
+
+.section h2{
+color:#00e5ff;
+margin-bottom:10px;
+}
+
+.section p{
+max-width:500px;
+margin:auto;
+opacity:0.75;
+font-size:14px;
+}
+
+.btn{
+display:inline-block;
+margin-top:15px;
+padding:10px 20px;
+background:linear-gradient(45deg,#00c6ff,#0072ff);
+border-radius:8px;
+color:white;
+text-decoration:none;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+/* FOOTER */
+.footer{
+background:rgba(0,0,0,0.7);
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+.footer a{
+color:#00e5ff;
+text-decoration:none;
+margin:0 10px;
+font-size:14px;
+}
+
+.footer a:hover{
+text-decoration:underline;
 }
 
 </style>
+
+<script>
+function toggleMenu(){
+document.querySelector(".nav-links").classList.toggle("active");
+}
+</script>
 
 </head>
 
 <body>
 
-<!-- FLOATING CYBER ICONS -->
-
+<!-- FLOATING ICONS -->
 <div class="icon">🤖</div>
 <div class="icon">🔗</div>
 <div class="icon">🧠</div>
@@ -288,54 +244,78 @@ gap:20px;
 <div class="icon">🔍</div>
 <div class="icon">📷</div>
 
-<div class="header">
+<!-- NAVBAR -->
+<div class="navbar">
+<div class="logo">AI Dashboard</div>
 
+<div class="menu" onclick="toggleMenu()">☰</div>
+
+<div class="nav-links">
+<a href="#home">Home</a>
+<a href="#register">Register</a>
+<a href="#blockchain">Blockchain</a>
+<a href="#verify">Verify</a>
+<a href="#products">Products</a>
+</div>
+</div>
+
+<!-- HEADER -->
+<div id="home" class="header">
 <h1>AI Blockchain Command Center</h1>
-
-<p class="slogan">
-Scan • Verify • Trust — Securing Products with AI Intelligence & Blockchain Transparency
-</p>
-
+<p>Secure • Track • Verify using AI & Blockchain</p>
 </div>
 
+<!-- STATS -->
 <div class="stats">
-
 <div class="card">
-
 <h3>Total Blocks</h3>
-
 <p>{{ total_blocks }}</p>
-
 </div>
 
 <div class="card">
-
 <h3>Total Products</h3>
-
 <p>{{ total_products }}</p>
-
 </div>
 
 <div class="card">
-
 <h3>Latest Product</h3>
-
 <p>{{ latest_product }}</p>
-
+</div>
 </div>
 
+<!-- SECTIONS -->
+
+<div id="register" class="section">
+<h2>Register Product</h2>
+<p>Add products securely into blockchain.</p>
+<a href="/register" class="btn">Explore</a>
 </div>
 
-<div class="dashboard-links">
+<div id="blockchain" class="section">
+<h2>View Blockchain</h2>
+<p>Check all stored blocks and transactions.</p>
+<a href="/blockchain" class="btn">Explore</a>
+</div>
 
-<a href="/register">Register Product</a>
+<div id="verify" class="section">
+<h2>Verify Product</h2>
+<p>Validate product authenticity instantly.</p>
+<a href="/verify" class="btn">Explore</a>
+</div>
 
-<a href="/blockchain">View Blockchain</a>
+<div id="products" class="section">
+<h2>View Products</h2>
+<p>Browse all registered product details.</p>
+<a href="/products" class="btn">Explore</a>
+</div>
 
-<a href="/verify">Verify Product</a>
-
-<a href="/products">View Products</a>
-
+<!-- FOOTER -->
+<div class="footer">
+<a href="#">Support</a> |
+<a href="#">Contact</a>
+<p style="margin-top:10px;font-size:12px;opacity:0.6;">
+© 2026 AI Blockchain System
+</p>
 </div>
 
 </body>

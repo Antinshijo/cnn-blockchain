@@ -326,5 +326,25 @@
                 "pattern_score": 106
             }
         }
+    },
+    {
+        "index": 22,
+        "timestamp": "2026-04-02 00:27:33.270151",
+        "proof": 1,
+        "previous_hash": "4d2fdb2d03966f653887bdce4118b4c52bb73bf995fc6140c8f50718b3c692bf",
+        "data": {
+            "product_name": "dove",
+            "product_id": "dove--484",
+            "image": "static/product_images\\dove--484.png",
+            "features": {
+                "mean_color": [
+                    139.92575,
+                    136.0134,
+                    145.245225
+                ],
+                "edge_strength": 1344105,
+                "pattern_score": 139
+            }
+        }
     }
 ]
