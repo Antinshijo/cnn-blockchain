@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EC2_IP = "65.1.64.109"   // un EC2 IP
+        EC2_IP = "13.201.161.221"   // un EC2 IP
         PROJECT_PATH = "/root/project/cnn-blockchain"
     }
 
