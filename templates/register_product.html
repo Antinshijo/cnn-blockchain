@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 <title>AI Product Registration</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -16,20 +13,19 @@ font-family:Segoe UI;
 }
 
 body{
-height:100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 background:#020617;
 color:white;
-overflow:hidden;
+overflow-x:hidden;
+padding:20px;
 }
-
-/* CYBER GRID BACKGROUND */
 
 body::before{
 content:"";
-position:absolute;
+position:fixed;
 width:200%;
 height:200%;
 background-image:
@@ -37,6 +33,7 @@ linear-gradient(rgba(0,255,255,0.08) 1px, transparent 1px),
 linear-gradient(90deg, rgba(0,255,255,0.08) 1px, transparent 1px);
 background-size:60px 60px;
 animation:gridMove 25s linear infinite;
+z-index:-1;
 }
 
 @keyframes gridMove{
@@ -44,111 +41,96 @@ animation:gridMove 25s linear infinite;
 100%{transform:translate(-200px,-200px)}
 }
 
-/* FLOATING ROBOTS */
-
-.robot{
-position:absolute;
-font-size:35px;
-opacity:0.12;
-animation:floatRobot 18s infinite linear;
-}
-
-.robot:nth-child(1){top:10%;left:5%}
-.robot:nth-child(2){top:70%;left:10%}
-.robot:nth-child(3){top:30%;right:10%}
-.robot:nth-child(4){bottom:10%;right:5%}
-
-@keyframes floatRobot{
-
-0%{transform:translateY(0)}
-50%{transform:translateY(-40px)}
-100%{transform:translateY(0)}
-
-}
-
-/* PARTICLES */
-
-.particle{
-position:absolute;
-width:4px;
-height:4px;
-background:#00ffff;
-border-radius:50%;
-opacity:0.6;
-animation:particleMove 10s linear infinite;
-}
-
-@keyframes particleMove{
-
-0%{
-transform:translateY(0);
-opacity:0;
-}
-
-50%{
-opacity:1;
-}
-
-100%{
-transform:translateY(-600px);
-opacity:0;
-}
-
-}
-
-/* MAIN UI */
-
 .main-ui{
+width:100%;
+max-width:420px;
 text-align:center;
 z-index:5;
-animation:fadeIn 1.2s ease;
 }
-
-/* TITLE */
 
 h1{
-font-size:36px;
+font-size:30px;
 margin-bottom:10px;
+color:#00e5ff;
 }
-
-/* SLOGAN */
 
 .slogan{
 opacity:0.7;
-margin-bottom:30px;
+margin-bottom:25px;
 }
-
-/* INPUT */
 
 input{
-width:260px;
-padding:12px;
-margin:10px;
+width:100%;
+padding:13px;
+margin:10px 0;
 border:none;
-border-radius:6px;
+border-radius:8px;
 outline:none;
-font-size:14px;
+font-size:15px;
 }
 
-/* BUTTON */
+.file-box{
+background:rgba(255,255,255,0.08);
+border:1px dashed #00e5ff;
+padding:15px;
+border-radius:10px;
+margin:15px 0;
+}
+
+.preview-area{
+display:none;
+margin-top:15px;
+}
+
+.crop-box{
+position:relative;
+width:100%;
+height:260px;
+overflow:hidden;
+border:2px solid #00e5ff;
+border-radius:12px;
+background:#000;
+}
+
+.crop-box img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.scan-frame{
+position:absolute;
+top:10%;
+left:8%;
+width:84%;
+height:80%;
+border:3px solid #00ff88;
+box-shadow:0 0 0 9999px rgba(0,0,0,0.45);
+border-radius:12px;
+pointer-events:none;
+}
+
+.note{
+font-size:13px;
+opacity:0.8;
+margin-top:8px;
+}
 
 button{
-padding:12px 25px;
+width:100%;
+padding:13px;
 border:none;
-border-radius:6px;
+border-radius:8px;
 background:linear-gradient(45deg,#00e5ff,#0072ff);
 color:white;
-font-size:15px;
+font-size:16px;
 cursor:pointer;
-transition:0.3s;
+margin-top:12px;
 }
 
 button:hover{
-transform:scale(1.08);
 box-shadow:0 0 20px #00e5ff;
 }
-
-/* BACK BUTTON */
 
 .back{
 display:block;
@@ -160,56 +142,10 @@ text-decoration:none;
 .back:hover{
 color:white;
 }
-
-/* ANIMATION */
-
-@keyframes fadeIn{
-
-from{
-opacity:0;
-transform:translateY(30px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-/* MOBILE */
-
-@media(max-width:500px){
-
-h1{
-font-size:26px;
-}
-
-input{
-width:90%;
-}
-
-}
-
 </style>
-
 </head>
 
 <body>
-
-<div class="robot">🤖</div>
-<div class="robot">🤖</div>
-<div class="robot">🤖</div>
-<div class="robot">🤖</div>
-<div class="robot">🤖</div>
-<div class="robot">🤖</div>
-<div class="robot">🤖</div>
-<div class="robot">🤖</div>
-
-<div class="particle" style="left:20%;animation-delay:0s"></div>
-<div class="particle" style="left:40%;animation-delay:2s"></div>
-<div class="particle" style="left:60%;animation-delay:4s"></div>
-<div class="particle" style="left:80%;animation-delay:6s"></div>
 
 <div class="main-ui">
 
@@ -219,7 +155,7 @@ width:90%;
 Secure your products using AI + Blockchain Technology
 </p>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" id="registerForm">
 
 <input 
 type="text"
@@ -227,24 +163,34 @@ name="product_name"
 placeholder="Product Name"
 required>
 
-<br>
-
 <input 
 type="text"
 name="product_id"
 placeholder="Product ID"
 required>
 
-<br>
-
+<div class="file-box">
 <input 
 type="file"
+id="productImage"
 name="product_image"
 accept="image/*"
-capture="environment"
 required>
 
-<br>
+<p class="note">
+Choose Camera or Gallery. Align only the product inside green box.
+</p>
+</div>
+
+<div class="preview-area" id="previewArea">
+<div class="crop-box">
+<img id="previewImage">
+<div class="scan-frame"></div>
+</div>
+<p class="note">
+Product mattum green box inside varanum.
+</p>
+</div>
 
 <button type="submit">
 Register Product
@@ -258,6 +204,28 @@ Register Product
 
 </div>
 
-</body>
+<script>
+const productImage = document.getElementById("productImage");
+const previewArea = document.getElementById("previewArea");
+const previewImage = document.getElementById("previewImage");
 
+productImage.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(file){
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+            previewImage.src = e.target.result;
+            previewArea.style.display = "block";
+        }
+
+        reader.readAsDataURL(file);
+    }
+
+});
+</script>
+
+</body>
 </html>

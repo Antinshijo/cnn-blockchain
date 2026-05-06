@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from blockchain import Blockchain
 from feature_extractor import extract_features
 from feature_matcher import compare_features
@@ -9,6 +9,8 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 blockchain = Blockchain()
+
+
 
 
 # ================= HOME =================
@@ -170,6 +172,7 @@ def verify_product():
 
 
 # ================= PRODUCT GALLERY =================
+# ================= PRODUCT GALLERY =================
 @app.route('/products')
 def products():
 
@@ -183,6 +186,27 @@ def products():
         "products.html",
         products=product_list
     )
+
+
+@app.route('/delete_product/<product_id>', methods=['POST'])
+def delete_product(product_id):
+
+    new_chain = []
+
+    for block in blockchain.chain:
+
+        if block.get("index") == 0:
+            new_chain.append(block)
+            continue
+
+        data = block.get("data")
+
+        if data and data.get("product_id") != product_id:
+            new_chain.append(block)
+
+    blockchain.chain = new_chain
+
+    return redirect('/products')
 
 
 # ================= VIEW BLOCKCHAIN =================
