@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         EC2_IP = "13.201.161.221"
-        PROJECT_PATH = "/home/ubuntu/project/cnn-blockchain"
+        PROJECT_PATH = "/home/ubuntu/cnn-blockchain"
     }
 
     stages {
@@ -19,14 +19,14 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-key']) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} << 'EOF'
-                    cd ${PROJECT_PATH}
-                    git pull origin main
-                    pkill -f "python app.py" || true
-                    source venv/bin/activate
-                    nohup python app.py > output.log 2>&1 &
-                    EOF
-                    """
+ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} << EOF
+cd ${PROJECT_PATH}
+git pull origin main
+pkill -f "python app.py" || true
+source venv/bin/activate
+nohup python app.py > output.log 2>&1 &
+EOF
+"""
                 }
             }
         }
