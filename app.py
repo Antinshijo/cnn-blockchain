@@ -5,21 +5,48 @@ from feature_matcher import compare_features
 import qrcode
 import os
 import random
+import json
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 blockchain = Blockchain()
 
 
+# ================= JSON STORAGE =================
+
+BLOCKCHAIN_FILE = "blockchain_data.json"
+
+
+def save_chain():
+    with open(BLOCKCHAIN_FILE, "w") as file:
+        json.dump(blockchain.chain, file, indent=4)
+
+
+def load_chain():
+    if os.path.exists(BLOCKCHAIN_FILE):
+        with open(BLOCKCHAIN_FILE, "r") as file:
+            blockchain.chain = json.load(file)
+
+
+load_chain()
+
+
+# ================= ABOUT =================
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
 
 # ================= HOME =================
+
 @app.route('/')
 def home():
     return render_template("login.html")
 
 
 # ================= DASHBOARD =================
+
 @app.route('/dashboard')
 def dashboard():
 
@@ -29,7 +56,9 @@ def dashboard():
     latest_product = None
 
     if total_products > 0:
-        latest_product = blockchain.chain[-1]["data"]["product_name"]
+        latest_block = blockchain.chain[-1]
+        if latest_block.get("data"):
+            latest_product = latest_block["data"].get("product_name")
 
     return render_template(
         "dashboard.html",
@@ -40,7 +69,8 @@ def dashboard():
 
 
 # ================= REGISTER PRODUCT =================
-@app.route('/register', methods=['GET','POST'])
+
+@app.route('/register', methods=['GET', 'POST'])
 def register_product():
 
     if request.method == 'POST':
@@ -58,14 +88,11 @@ def register_product():
 
             image.save(image_path)
 
-            # AI FEATURE EXTRACTION
             features = extract_features(image_path)
 
-            # convert numpy → list
             if hasattr(features, "tolist"):
                 features = features.tolist()
 
-            # Blockchain block
             previous_block = blockchain.get_previous_block()
             previous_hash = blockchain.hash(previous_block)
 
@@ -80,8 +107,9 @@ def register_product():
                 }
             )
 
-            # QR CODE
-            qr_data = qr_data = f"http://65.1.64.109:5000/verify?product_id={product_id}"
+            save_chain()
+
+            qr_data = f"http://65.1.64.109:5000/verify?product_id={product_id}"
 
             qr = qrcode.make(qr_data)
 
@@ -96,7 +124,8 @@ def register_product():
 
 
 # ================= VERIFY PRODUCT =================
-@app.route('/verify', methods=['GET','POST'])
+
+@app.route('/verify', methods=['GET', 'POST'])
 def verify_product():
 
     result = None
@@ -122,15 +151,19 @@ def verify_product():
 
             new_features = extract_features(filepath)
 
+            if hasattr(new_features, "tolist"):
+                new_features = new_features.tolist()
+
             for block in blockchain.chain:
 
-                if block.get("data") and block["data"].get("product_id") == product_id:
+                data = block.get("data")
 
-                    stored_features = block["data"]["features"]
+                if data and str(data.get("product_id")) == str(product_id):
+
+                    stored_features = data["features"]
 
                     score = compare_features(stored_features, new_features)
 
-                    # similarity %
                     similarity = max(0, 100 - int(score / 50))
 
                     if score < 5000:
@@ -172,21 +205,26 @@ def verify_product():
 
 
 # ================= PRODUCT GALLERY =================
-# ================= PRODUCT GALLERY =================
+
 @app.route('/products')
 def products():
 
     product_list = []
 
     for block in blockchain.chain:
-        if block.get("data"):
-            product_list.append(block["data"])
+
+        data = block.get("data")
+
+        if data:
+            product_list.append(data)
 
     return render_template(
         "products.html",
         products=product_list
     )
 
+
+# ================= DELETE PRODUCT =================
 
 @app.route('/delete_product/<product_id>', methods=['POST'])
 def delete_product(product_id):
@@ -201,22 +239,31 @@ def delete_product(product_id):
 
         data = block.get("data")
 
-        if data and data.get("product_id") != product_id:
-            new_chain.append(block)
+        if data and str(data.get("product_id")) == str(product_id):
+            continue
+
+        new_chain.append(block)
 
     blockchain.chain = new_chain
+
+    for i, block in enumerate(blockchain.chain):
+        block["index"] = i
+
+    save_chain()
 
     return redirect('/products')
 
 
 # ================= VIEW BLOCKCHAIN =================
+
 @app.route('/blockchain')
 def view_blockchain():
     return render_template("blockchain_view.html", chain=blockchain.chain)
 
 
 # ================= AI PRODUCT DETECTION =================
-@app.route('/detect', methods=['GET','POST'])
+
+@app.route('/detect', methods=['GET', 'POST'])
 def detect_product():
 
     result = None
@@ -250,5 +297,6 @@ def detect_product():
 
 
 # ================= RUN SERVER =================
+
 if __name__ == '__main__':
-   app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
